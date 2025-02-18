@@ -4,6 +4,7 @@ import com.example.jademat.airquality.service.AirQualityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 
@@ -18,9 +19,9 @@ public class AirQualityController {
 
 
     @GetMapping("/basic")
-    public String basic(Model model) throws IOException {
+    public String basic(@RequestParam(defaultValue =  "서울") String sidoName, Model model) throws IOException {
 
-        String result = airQualityService.getAirQualityDataBasic();
+        String result = airQualityService.getAirQualityDataBasic(sidoName);
 
         model.addAttribute("airQualityData", result);
 

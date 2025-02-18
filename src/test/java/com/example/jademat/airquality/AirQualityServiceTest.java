@@ -23,7 +23,7 @@ public class AirQualityServiceTest {
     @DisplayName("testAirQualityServiceBasic")
     public void testAirQualityServiceBasic() throws IOException {
         // 테스트 실행(메서드 호출)
-        String result = airQualityService.getAirQualityDataBasic();
+        String result = airQualityService.getAirQualityDataBasic("서울");
 
         // 결과 검증
         assertNotNull(result);          // 응답이 null인지 여부 확인
