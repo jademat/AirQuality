@@ -1,10 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>미세먼지 Spring boot 앱</title>
+    <script src = "https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <h1>AirQuality Data</h1>
+    <p id = "airQualityMsg"></p>
+    <canvas id = "airQualityChart" width="1280" height="720" style="margin : 0 auto"></canvas>
 
+    <hr>
+    <h2>realtime air quality data</h2>
+    <!--<p th:text = "${airQualityData}"></p>-->
+
+<script th:inline = "javascript">
+    // 컨트롤러에서 넘겨준 객체를 자바스크립트 변수에 초기화
+    let airQualityData  = /*[[${airQualityData}]]*/ '{}';
+
+    // JSON 문자열을 자바스크립트 객체로 분석 parse
+    let data = JSON.parse(airQualityData );
+    let items = data?.response?.body?.items || [];
+    console.log(items);
+
+    // 그래프 출력
+    if(items.length === 0){
+        let ctx = document.querySelector('#airQualityMsg');
+        ctx.innerHTML = "<span style = 'color : red'>미세먼지 데이터 없음</span>"
+    }else{
+        let ctx = document.querySelector('#airQualityChart').getContext('2d');
+        let myChart = new Chart(ctx, {
+            type: 'line',    // 선그래프
+            data: {
+                labels: items.map( item => item.stationName),       // X축 지정
+                datasets: [{
+                    label: 'PM10',
+                    data: items.map(item => item.pm10Value),
+                borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'PM25',
+                    data: items.map(item => item.pm25Value),
+                    borderColor: 'rgb(192,75,159)',
+                    borderWidth: 1
+                },
+                {
+                    label: '통합대기환경수치',
+                    data: items.map(item => item.khaiValue),
+                    borderColor: 'rgb(100,192,75)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'O3',
+                    data: items.map(item => item.o3Value),
+                    borderColor: 'rgb(192,151,75)',
+                    borderWidth: 1
+                }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                responsive: false, // 반응형으로 설정
+                    maintainAspectRatio: true // 비율 유지하지 않음
+            }
+        });
+    }
+</script>
 </body>
 </html>

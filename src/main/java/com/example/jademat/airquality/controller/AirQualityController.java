@@ -1,7 +1,6 @@
 package com.example.jademat.airquality.controller;
 
 import com.example.jademat.airquality.service.AirQualityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +22,7 @@ public class AirQualityController {
 
         String result = airQualityService.getAirQualityDataBasic();
 
-        model.addAttribute("airQulityData", result);
+        model.addAttribute("airQualityData", result);
 
         return "airQuality";
 

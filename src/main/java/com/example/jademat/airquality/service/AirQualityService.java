@@ -14,8 +14,8 @@ public class AirQualityService {
 
     // data.go.kr 로 부터 미세먼지 정보를 가져옴
     public String getAirQualityDataBasic() throws IOException {
-        StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth"); /*URL*/
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=wipvyRzgDJGsdUq6VEQbvjAsQu2ahlLxbvYGuIQwsMyEHuTazgsv8s%2FoBineQ7%2BGNNY%2BMABsLlqyS9nE5TQoDQ%3D%3D"); /*Service Key*/
+        StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=wipvyRzgDJGsdUq6VEQbvjAsQu2ahlLxbvYGuIQwsMyEHuTazgsv8s%2FoBineQ7%2BGNNY%2BMABsLlqyS9nE5TQoDQ%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("returnType","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*xml 또는 json*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("100", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
